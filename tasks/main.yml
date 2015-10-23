@@ -1,0 +1,10 @@
+---
+- name: Config WiFi
+  template: src=wpa_supplicant.conf.j2 dest=/etc/wpa_supplicant/wpa_supplicant.conf 
+  notify:
+    - restart networking
+  tags: [ configuration, network, raspi_wifi ]
+
+- name: Start networking service
+  service: name=networking state=started enabled=yes
+  tags: [ raspi_wifi, service ]
